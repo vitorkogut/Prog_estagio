@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Prema</title>
+</head>
+<body>
+  <h2>Cadastrar nova:</h2>
+  <form action="/ver_marcas.html/adicionar" method="POST">
+    <input type="text" placeholder="Nome" name="nome">
+    <input type="text" placeholder="Cidade" name="cidade">
+
+    <select name="estado">
+        <option value="AC">AC</option>
+        <option value="AL">AL</option>
+        <option value="AP">AP</option>
+        <option value="AM">AM</option>
+        <option value="BA">BA</option>
+        <option value="CE">CE</option>
+        <option value="DF">DF</option>
+        <option value="ES">ES</option>
+        <option value="GO">GO</option>
+        <option value="MA">MA</option>
+        <option value="MT">MT</option>
+        <option value="MS">MS</option>
+        <option value="MG">MG</option>
+        <option value="PA">PA</option>
+        <option value="PB">PB</option>
+        <option value="PR">PR</option>
+        <option value="PE">PE</option>
+        <option value="PI">PI</option>
+        <option value="RJ">RJ</option>
+        <option value="RN">RN</option>
+        <option value="RS">RS</option>
+        <option value="RO">RO</option>
+        <option value="RR">RR</option>
+        <option value="SC">SC</option>
+        <option value="SP">SP</option>
+        <option value="SE">SE</option>
+        <option value="TO">TO</option>
+      </select>
+
+    <input type="text" placeholder="Contato" name="contato" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false";>
+    <button type="submit">Submit</button>
+  </form>
+
+  <h2> Marcas cadastradas: </h2>
+  
+  <ul class="marcas">
+    <% for(var i = 0; i < cursor.length; i++) {%>
+        <li class=marca>
+            <span> | Nome: <%=cursor[i].nome %> </span>
+            <span>| Cidade: <%=cursor[i].cidade %> </span>
+            <span>| Estado: <%=cursor[i].estado %> </span>
+            <span>| Contato: <%=cursor[i].contato %> </span>
+        </li>
+    <% } %>
+  </ul>
+  
+
+
+</body>
+</html>

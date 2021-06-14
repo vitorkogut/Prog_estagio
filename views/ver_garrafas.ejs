@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <meta charset="UTF-8">
+  <title>Prema</title>
+</head>
+<body>
+  <h2>Cadastrar nova:</h2>
+  <form action="/ver_garrafas.html/adicionar" method="POST">
+    <input type="text" placeholder="Tipo" name="tipo">
+    <input type="text" placeholder="Material" name="material">
+    <input type="text" placeholder="Capacidade em ml" name="capacidade" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false";>
+    <button type="submit">Submit</button>
+  </form>
+
+  <h2> Garrafas cadastradas: </h2>
+  
+  <ul class="garrafas">
+    <% for(var i = 0; i < cursor.length; i++) {%>
+        <li class=garrafa>
+            <span> | Tipo: <%=cursor[i].tipo %> </span>
+            <span>| Material: <%=cursor[i].material %> </span>
+            <span>| Capacidade: <%=cursor[i].capacidade %> ml</span>
+        </li>
+    <% } %>
+  </ul>
+  
+
+
+</body>
+</html>

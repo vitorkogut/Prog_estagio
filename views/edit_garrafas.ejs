@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Prema</title>
+</head>
+<body>
+  
+
+  <h2> Garrafas cadastradas: </h2>
+  
+  <ul class="garrafas">
+    <% for(var i = 0; i < cursor.length; i++) {%>
+        <li class=garrafa>
+          <span> ID: <%=cursor[i]._id %> </span>
+            <span> | Tipo: <%=cursor[i].tipo %> </span>
+            <span>| Material: <%=cursor[i].material %> </span>
+            <span>| Capacidade: <%=cursor[i].capacidade %> </span>
+        </li>
+    <% } %>
+  </ul>
+
+  <form action="/edit_garrafas.html/remover" method="POST">
+    <input type="text" placeholder="ID a deletar" name="delete_id">
+
+    <button type="submit">Deletar</button>
+  </form>
+
+
+</body>
+</html>

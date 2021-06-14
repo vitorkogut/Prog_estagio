@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Prema</title>
+</head>
+<body>
+  
+
+  <h2> Marcas cadastradas: </h2>
+  
+  <ul class="marcas">
+    <% for(var i = 0; i < cursor.length; i++) {%>
+        <li class=marca>
+            <span> ID: <%=cursor[i]._id %> </span>
+            <span> | Nome: <%=cursor[i].nome %> </span>
+            <span>| Cidade: <%=cursor[i].cidade %> </span>
+            <span>| Estado: <%=cursor[i].estado %> </span>
+            <span>| Contato: <%=cursor[i].contato %> </span>
+        </li>
+    <% } %>
+  </ul>
+  
+
+  <form action="/edit_marcas.html/remover" method="POST">
+    <input type="text" placeholder="ID a deletar" name="delete_id">
+
+    <button type="submit">Deletar</button>
+  </form>
+
+
+</body>
+</html>

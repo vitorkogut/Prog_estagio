@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <meta charset="UTF-8">
+  <title>Prema</title>
+  
+</head>
+<body>
+  <h2>Cadastrar nova:</h2>
+
+  <form action="/ver_cervejas.html/adicionar" method="POST">
+    <input type="text" placeholder="Nome" name="nome">
+
+    
+    <select name="marca">
+
+      <% for(var i = 0; i < marcas.length; i++) {%>
+
+      <option> <%=marcas[i].nome %> </option>
+      
+      <% } %>
+
+    </select>
+
+    <select name="tipo">
+
+      <% for(var i = 0; i < tipos.length; i++) {%>
+
+      <option> <%=tipos[i].nome %> </option>
+      
+      <% } %>
+
+    </select>
+
+    <select name="garrafa">
+
+      <% for(var i = 0; i < garrafas.length; i++) {%>
+
+      <option> <%=garrafas[i].tipo %> </option>
+      
+      <% } %>
+
+    </select>
+    
+   
+    <input type="text" placeholder="Quantidade estoque" name="quantidade" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false";>
+    
+
+    
+    <button type="submit">Submit</button>
+  </form>
+
+  <h2> Cervejas cadastradas: </h2>
+  
+  <ul class="produtos">
+    <% for(var i = 0; i < cursor.length; i++) {%>
+        <li class=produto>
+            <span> | Nome: <%=cursor[i].nome %> </span>
+            <span>| Marca: <%=cursor[i].marca %> </span>
+            <span>| Garrafa: <%=cursor[i].garrafa %> </span>
+            <span>| Tipo: <%=cursor[i].tipo %> </span>
+            <span>| Quantidade em estoque: <%=cursor[i].quantidade %> </span>
+        </li>
+    <% } %>
+  </ul>
+  
+
+  
+</body>
+</html>

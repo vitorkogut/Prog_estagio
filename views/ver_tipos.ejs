@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Prema</title>
+</head>
+<body>
+  <h2>Cadastrar nova:</h2>
+  <form action="/ver_tipos.html/adicionar" method="POST">
+    <input type="text" placeholder="Nome" name="nome">
+    <input type="text" placeholder="Ingrediente principal" name="ingrediente_principal">
+    <input type="text" placeholder="Origem" name="origem">
+    <input type="text" placeholder="Sabor" name="sabor">
+    <button type="submit">Submit</button>
+  </form>
+
+  <h2> Tipos cadastrados: </h2>
+  
+  <ul class="tipos">
+    <% for(var i = 0; i < cursor.length; i++) {%>
+        <li class=tipo>
+            <span> | Nome: <%=cursor[i].nome %> </span>
+            <span>| Ingrediente principal: <%=cursor[i].ingrediente_principal %> </span>
+            <span>| Origem: <%=cursor[i].origem %> </span>
+            <span>| Sabor: <%=cursor[i].sabor %> </span>
+        </li>
+    <% } %>
+  </ul>
+  
+
+
+</body>
+</html>

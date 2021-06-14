@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <meta charset="UTF-8">
+  <title>Prema</title>
+  
+</head>
+<body>
+  <h2>Pesquisar:</h2>
+  <form action="/pesquisa_cervejas.html/pesquisar" method="POST">
+
+    <select name="categoria">
+        <option>marca</option>
+        <option>nome</option>
+        <option>tipo</option>
+        <option>garrafa</option>
+    </select>
+
+    <input type="text" placeholder="valor" name="valor">
+    <button type="submit">Pesquisar</button>
+  </form>
+
+  <h2> Cervejas cadastradas: </h2>
+  
+  <ul class="produtos">
+    <% for(var i = 0; i < cursor.length; i++) {%>
+        <li class=produto>
+            <span> | Nome: <%=cursor[i].nome %> </span>
+            <span>| Marca: <%=cursor[i].marca %> </span>
+            <span>| Garrafa: <%=cursor[i].garrafa %> </span>
+            <span>| Tipo: <%=cursor[i].tipo %> </span>
+            <span>| Quantidade em estoque: <%=cursor[i].quantidade %> </span>
+        </li>
+    <% } %>
+  </ul>
+  
+
+  
+</body>
+</html>
