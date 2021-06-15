@@ -55,6 +55,11 @@ node main.js
 Então entrar em http://localhost:3000/<br>
 Para utilizar as funções protegidas basta logar utilizando o usuario: "usuario", senha: "senha"
 
+<br>
+<br>
+<br>
+<br>
 
-
+Caso queira testar fique a vontade para editar/inserir/remover itens do BD :) <br>
+Estou a disposição para qualquer duvida ou problema que acontecer.
 <h4>Desenvolvido por João Vitor Specht Kogut </h4>
