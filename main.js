@@ -40,7 +40,7 @@ MongoClient.connect(url_conecxao, { useUnifiedTopology: true} ,function(err, cli
 
 /////// FUNCS ///////
 app.listen(3000, function() {
-    console.log('Esperando em http://localhost:3000/')
+    console.log('Esperando em http://localhost:3000/') // Inicia server em localhost:3000
 })
 
 
@@ -71,12 +71,12 @@ app.get("/ver_cervejas.html", async function(req, res) {      // Ao realizar ped
   tipos = await db.collection('Tipos').find().toArray()
 
   
-  res.render("ver_cervejas.ejs", {cursor:cursor, marcas:marcas, garrafas:garrafas, tipos:tipos  } )                       // renderiza o novo html com os dados
+  res.render("ver_cervejas.ejs", {cursor:cursor, marcas:marcas, garrafas:garrafas, tipos:tipos  } )      // renderiza o novo html com os dados
 })
 app.post('/ver_cervejas.html/adicionar',verifyJWT, function(req, res) {
   console.log(req.body)                                       // OBTEM DADOS DO FORM NOME "/ver_cervejas.html/adicionar"
   produtosCollec.insertOne(req.body)
-  res.redirect('/ver_cervejas.html')
+  res.redirect('/ver_cervejas.html') // Volta para pagina
 })
 
 
@@ -109,29 +109,29 @@ app.get("/edit_cervejas.html", async function(req, res) {
   cursor = await db.collection('Cervejas').find().toArray()   
   res.render("edit_cervejas.ejs",cursor)                       // renderiza o novo html com os dados
 })
-app.post('/edit_cervejas.html/remover',verifyJWT,  function(req, res) {               
+app.post('/edit_cervejas.html/remover',verifyJWT,  function(req, res) {           // Função protegida de remoção por ID     
   produtosCollec.deleteOne({_id: new mongodb.ObjectID(req.body.delete_id)})
   res.redirect('/edit_cervejas.html')
 })
 app.post('/edit_cervejas.html/edit',verifyJWT,  function(req, res){
-  var querry = {_id: mongodb.ObjectID(req.body.modify_id)};
+  var querry = {_id: mongodb.ObjectID(req.body.modify_id)}; // seleciona qual item modificar
 
   var a_modificar = req.body.elemento_a_modificar.toString();
-  console.log(a_modificar)
+  //console.log(a_modificar)
 
-  if( a_modificar == "tipo"){
+  if( a_modificar == "tipo"){ // caso a opção selecionada seja "tipo"
     novo_valor = {$set: {  tipo: req.body.novo_valor.toString(),} };
     produtosCollec.updateOne(querry, novo_valor);
   }
-  if( a_modificar == "nome"){
+  if( a_modificar == "nome"){// caso a opção selecionada seja "nome"
     novo_valor = {$set:{nome : req.body.novo_valor.toString(),} };
     produtosCollec.updateOne(querry, novo_valor);  
   }
-  if( a_modificar == "marca"){
+  if( a_modificar == "marca"){ // caso a opção selecionada seja "marca"
     novo_valor = {$set: {  marca : req.body.novo_valor.toString(),} };
     produtosCollec.updateOne(querry, novo_valor);  
   }
-  if( a_modificar == "garrafa"){
+  if( a_modificar == "garrafa"){ // caso a opção selecionada seja "garrafa"
     novo_valor = {$set: {  garrafa : req.body.novo_valor.toString(),} };
     produtosCollec.updateOne(querry, novo_valor);
   }
@@ -143,7 +143,7 @@ app.get("/edit_garrafas.html", async function(req, res) {
   cursor = await db.collection('Garrafas').find().toArray()   // pega dados dos produtos
   res.render("edit_garrafas.ejs",cursor)                                     // renderiza o novo html com os dados
 })
-app.post('/edit_garrafas.html/remover',verifyJWT,  function(req, res) {               
+app.post('/edit_garrafas.html/remover',verifyJWT,  function(req, res) {     // Função protegida de remoção por ID           
   garrafasCollec.deleteOne({_id: new mongodb.ObjectID(req.body.delete_id)})
   res.redirect('/edit_garrafas.html')
 })
@@ -153,7 +153,7 @@ app.get("/edit_marcas.html", async function(req, res) {
   cursor = await db.collection('Marcas').find().toArray()   
   res.render("edit_marcas.ejs",cursor)                       // renderiza o novo html com os dados
 })
-app.post('/edit_marcas.html/remover',verifyJWT,  function(req, res) {               
+app.post('/edit_marcas.html/remover',verifyJWT,  function(req, res) {               // Função protegida de remoção por ID
   marcasCollec.deleteOne({_id: new mongodb.ObjectID(req.body.delete_id)})
   res.redirect('/edit_marcas.html')
 })
@@ -163,7 +163,7 @@ app.get("/edit_tipos.html", async function(req, res) {
   cursor = await db.collection('Tipos').find().toArray()   
   res.render("edit_tipos.ejs",cursor)                       // renderiza o novo html com os dados
 })
-app.post('/edit_tipos.html/remover',verifyJWT,  function(req, res) {               
+app.post('/edit_tipos.html/remover',verifyJWT,  function(req, res) {        // Função protegida de remoção por ID        
   tiposCollec.deleteOne({_id: new mongodb.ObjectID(req.body.delete_id)})
   res.redirect('/edit_tipos.html')
 })
@@ -175,11 +175,10 @@ app.get("/pesquisa_cervejas.html", async function(req, res) {
 })
 app.post("/pesquisa_cervejas.html/pesquisar", async function(req, res) {
   
-  var a_modificar = req.body.categoria.toString()
-  var valor_pesquisado = req.body.valor.toString() 
+  var a_modificar = req.body.categoria.toString() // Valor selecionado para filtrar
 
   if( a_modificar == "tipo"){
-    cursor = await produtosCollec.find( {tipo : req.body.valor.toString()} ).toArray()
+    cursor = await produtosCollec.find( {tipo : req.body.valor.toString()} ).toArray() // "valor" é o item inserido no input pesquisado
   }
   if( a_modificar == "nome"){
     cursor = await produtosCollec.find( {nome : req.body.valor.toString()} ).toArray()
@@ -195,9 +194,9 @@ app.post("/pesquisa_cervejas.html/pesquisar", async function(req, res) {
 })
 
 
-///////// authentication///////////
+///////// AUTH ///////////
 app.get("/login.html", async function(req, res) {         
-  res.render("login.ejs")                       // renderiza o novo html com os dados
+  res.render("login.ejs")                       
 })
 app.post('/login.html/logar', async (req, res, next) => {
   var user_fornecido = req.body.user.toString() 
@@ -206,7 +205,7 @@ app.post('/login.html/logar', async (req, res, next) => {
 
   cursor = await db.collection("Users").find( {user : user_fornecido} ).toArray()
 
-  if ( cursor[0].user.toString() == user_fornecido && cursor[0].senha.toString() == senha_fornecida ){
+  if ( cursor[0].user.toString() == user_fornecido && cursor[0].senha.toString() == senha_fornecida ){ // confere se o user existe no BD
     autenticado = true
   }
 
@@ -214,7 +213,7 @@ app.post('/login.html/logar', async (req, res, next) => {
     //auth ok
     const id = cursor[0]._id; 
     const token = await jwt.sign({ id }, process.env.SECRET, {
-      expiresIn: 300 // expires in 5min
+      expiresIn: 300 // token dura 5min
     });
     TOKEN_GLOBAL = token
     return res.json({ auth: true, token: token });
@@ -222,7 +221,7 @@ app.post('/login.html/logar', async (req, res, next) => {
   res.status(500).json({message: 'Login inválido!'});
 })
 
-function verifyJWT(req, res, next){
+function verifyJWT(req, res, next){ // função de verificação de token
   const token = TOKEN_GLOBAL;
   if (!token) return res.status(401).json({ auth: false, message: 'No token provided.' });
   
@@ -235,6 +234,6 @@ function verifyJWT(req, res, next){
   })}
 
   app.get("/deslogar", async function(req, res) {         
-    TOKEN_GLOBAL = "OFF"  
-    res.redirect("/")                     // renderiza o novo html com os dados
+    TOKEN_GLOBAL = "OFF"  // anula o valor do token
+    res.redirect("/")                     
   })
